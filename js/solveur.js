@@ -121,12 +121,15 @@ function preparation_trace() {
 	var bsup=parseFloat(s_bsup.value) ;
 	var nb=parseFloat(s_nb.value) ;
 	// on peut commencer les itérations
-	var p= (bsup-binf)/nb;
+	var p= parseFloat((bsup-binf)/nb);
+	console.log("bvaleur de p",p);
 	var x=binf;
+	var couples1=[];
 	var couples=[];
 	for (var i=0; i<nb ;i++) {
 		var y=f(x);
-		couples.push({x,y});
+		couples1.push({x,y});
+		couples.push([y,x]);
 		x+=p;
 	}
 	trace_graphe(couples);
@@ -136,38 +139,30 @@ function preparation_trace() {
 // ---------------------------------------------
 // recoit un tableau avec les points x et y  
 // ---------------------------------------------
-function trace_graphe(data){
+function trace_graphe1(data){
 	// chargement des données pour le tracer 
 	var Data=[{name: 'fonction',	data: []}];
 	var Key=[]; // pour l axe des abcisses
 	for (var element in data) {
 		Data[0].data.push(data[element].y);
-		Key.push(parseInt(data[element].x));
+		Key.push(data[element].x);
 	}
+	console.log(Key);
 	Highcharts.chart('containerGraphe', {
 	    chart: {
         	scrollablePlotArea: {
             	minWidth: 500
         	}
     	},
-		title: {
-			text: 'Représentation de la courbe '
-		},
-		subtitle: {
-			text: 'PSB'
-		},
+		title: {text: 'Représentation de la courbe '},
+		subtitle: {text: 'PSB'},
 		tooltip: {
         	shared: true,
         	crosshairs: true
     	},
-		yAxis: {
-			title: {
-				text: 'Number'
-			}
+		yAxis: {title: {text: 'f(x)'}
 		},
-		xAxis: {
-			Key
-		},
+		xAxis: {Key	},
 		legend: {
 			layout: 'vertical',
 			align: 'right',
@@ -217,5 +212,93 @@ function trace_graphe(data){
 		}
 	});
 }
+
+function trace_graphe(Data) {
+	Highcharts.chart('containerGraphe', {
+	chart: {
+        type: 'spline',
+		inverted: true,
+		scrollablePlotArea: {
+			minWidth: 500
+		}
+    },
+    title: {
+        text: 'Allure de la courbe '
+    },
+    subtitle: {
+        text: 'PSB'
+    },
+    xAxis: {
+        reversed: false,
+        title: {
+            enabled: true,
+            text: 'f(x)'
+        },
+        labels: {
+            format: '{value}'
+        },
+        accessibility: {
+            rangeDescription: 'Range: 0 to 80 km.'
+        },
+        maxPadding: 0.05,
+		showLastLabel: true,
+		plotLines: [{
+				value: 0,
+				width: 2,
+				color: 'blue'
+		}]
+    },
+    yAxis: {
+        title: {
+            text: 'x'
+        },
+        labels: {
+            format: '{value}'
+        },
+        accessibility: {
+            rangeDescription: 'Range: -90°C to 20°C.'
+        },
+		lineWidth: 2,
+		plotLines: [{
+			value: 0,
+			 width: 2,
+			color: 'blue'
+		}] 
+    },
+    legend: {
+        enabled: true
+    },
+    tooltip: {
+        headerFormat: '<b>{series.name}</b><br/>',
+        pointFormat: '{point.x}:{point.y}'
+    },
+    plotOptions: {
+        spline: {
+            marker: {
+                enable: true
+            }
+        }
+    },
+    series: [{
+        name: 'f(x)',
+        data: Data
+	}],
+	responsive: {
+		rules: [{
+			condition: {
+				maxWidth: 800
+			},
+			chartOptions: {
+				legend: {
+					layout: 'horizontal',
+					align: 'center',
+					verticalAlign: 'bottom'
+				}
+			}
+		}]
+	}
+});
+}
+
 
 

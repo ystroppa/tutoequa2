@@ -7,8 +7,10 @@
 	}
 .send {
 	background-color:blue;
-	margin-left: 50%;
 	color : white;
+}
+.form-row .control-label {
+	vertical-align: bottom;
 }
 .highcharts-figure, .highcharts-data-table table {
     min-width: 200px; 
