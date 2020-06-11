@@ -1,0 +1,88 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+        <title>Projet PSB Equations du second degre</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link href="css/bootstrap.min.css" rel="stylesheet">
+	<script src="js/jquery-3.4.1.min.js"></script>
+	<script src="https://code.highcharts.com/highcharts.js"></script>
+	<script src="https://code.highcharts.com/modules/series-label.js"></script>
+	<script src="https://www.highcharts.com/media/com_demo/js/highslide-full.min.js"></script>
+	<script src="https://www.highcharts.com/media/com_demo/js/highslide.config.js" charset=\"utf-8\"></script>
+	<link rel="stylesheet" type="text/css" href="https://www.highcharts.com/media/com_demo/css/highslide.css" />
+	<link rel="stylesheet" type="text/css" href="css/style.css" />
+
+</head>
+<body>
+	<div  class="container">
+		<form class="form-horizontal" action="" method="post">
+		  <div class="form-row  center">
+		    <label class="h3" for="object">Site de résolution d'une equation du second degré</label>
+		  </div>
+		  <div class="form-row">
+		    <label class="control-label col-sm-12" for="object">Enetrez les coefficients de l'équation</label>
+		  </div>
+		  <div class="form-row">
+		    <label class="control-label col-sm-1" for="object">a:</label>
+		    <div class="col col-sm-3">
+			<input  type="text" class="form-control valeurs" id="val_a" name="val_a" value="" placeholder="Enter a">
+		    </div>
+		    <label class="control-label col-sm-1" for="object">b:</label>
+		    <div class="col col-sm-3">
+			<input  type="text" class="form-control valeurs" id="val_b" name="val_b" value="" placeholder="Enter b">
+		    </div>
+		    <label class="control-label col-sm-1" for="object">c:</label>
+		    <div class="col col-sm-3">
+			<input  type="text" class="form-control valeurs" id="val_c" name="val_c" value="" placeholder="Enter c">
+		    </div>
+		  </div>
+		  <div class="form-row d-flex justify-content-center">
+		    <div class="col-sm-offset-5 col-sm-5" id="equation">
+			    <p>Equation </p>
+		    </div>
+		  </div>
+		  <div class="form-row">
+		    <div class="col-sm-offset-2 col-sm-10">
+		      <button type="button" class="btn send" onclick="appel_solver();" >Résolution</button>
+		    </div>
+		  </div>
+		  <div class="form-row">
+		    <div class="col-sm-offset-2 col-sm-10" id="resultat">
+			    <p>Résultats </p>
+		    </div>
+		  </div>
+		  <div class="form-row  center">
+		    <label class="col-sm-offset-2 control-label col-sm-12" for="object">Paramétrage du tracé</label>
+		  </div>
+		  <div class="form-row">
+		    <label class="control-label col-sm-1" for="object">B Inf:</label>
+		    <div class="col col-sm-3">
+			<input  type="text" class="form-control valeurs" id="binf" name="binf" value="" placeholder="Enter borne inf">
+		    </div>
+		    <label class="control-label col-sm-1" for="object">B Sup:</label>
+		    <div class="col col-sm-3">
+			<input  type="text" class="form-control valeurs" id="bsup" name="bsup" value="" placeholder="Enter borne sup">
+		    </div>
+		    <label class="control-label col-sm-2" for="object">n:</label>
+		    <div class="col col-sm-2">
+			<input  type="text" class="form-control valeurs" id="nb" name="nb" value="" placeholder="Enter nb de points">
+		    </div>
+		  </div>
+		 <div class="form-row">
+		   <div class="col-sm-offset-2 col-sm-10">
+		     <button type="button" class="btn send" onclick="preparation_trace()" >Tracé </button>
+		   </div>
+		 </div>
+		 <div class="form-row col-sm-10">
+			<figure class="highcharts-figure">
+				<div id="containerGraphe"></div>
+				<p class="highcharts-description">
+				</p>
+			</figure>
+		 </div>
+
+		</div>
+	<script src="js/solveur.js"></script>
+</body>
+</html>
